@@ -13,10 +13,6 @@ import Conferences from './Pages/Conferences'
 import Adhesion from './Pages/Adhesion'
 import Contact from './Pages/Contact'
 
-// Pages détaillées des événements
-import Afcom from './Pages/Evenements/Afcom'
-import Cjp from './Pages/Evenements/Cjp'
-import Rem from './Pages/Evenements/Rem'
 
 // Pages détaillées des formations
 import Comptabilite from './Pages/Formations/Comptabilite'
@@ -27,6 +23,7 @@ import Management from './Pages/Formations/Management'
 import Veille from './Pages/Formations/Veille'
 import Conseils from './Pages/Formations/Conseils'
 import Footer from './Components/Footer'
+import EvenementPage from './Pages/Evenements/EvennementPage'
 
 function App() {
   return (
@@ -46,9 +43,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
 
           {/* Routes des événements détaillés */}
-          <Route path="/evenements/afcom" element={<Afcom />} />
-          <Route path="/evenements/cjp" element={<Cjp />} />
-          <Route path="/evenements/rem" element={<Rem />} />
+          <Route path="/evenements/:slug" element={<EvenementPage/>} />
 
           {/* Routes des formations détaillées */}
           <Route path="/formations/comptabilite" element={<Comptabilite />} />

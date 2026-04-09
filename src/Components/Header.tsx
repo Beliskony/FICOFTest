@@ -17,18 +17,32 @@ import {
   Home,
   Info,
   MapPin,
+  ChevronDown,
 } from "lucide-react";
 
 type NavItem = {
   label: string;
   path: string;
   icon: React.ElementType;
+  subItems?: SubNavItem[]; // Optionnel pour les items avec sous-menu
 };
+
+type SubNavItem = {
+  label: string;
+  path: string;
+};
+
+const subNavItemsEvent: SubNavItem[] = [
+  { label: "AFCOM", path: "/evenements/afcom"},
+  { label: "CJP", path: "/evenements/cjp"},
+  { label: "ReM", path: "/evenements/rem"},
+]
+
 
 const navItems: NavItem[] = [
   { label: "Accueil", path: "/", icon: Home },
   { label: "FICOF", path: "/ficof", icon: Info },
-  { label: "Événements", path: "/evenements", icon: Calendar },
+  { label: "Événements", path: "/evenements", icon: Calendar, subItems: subNavItemsEvent },
   { label: "Formations", path: "/formations", icon: BookOpen },
   { label: "Offres d'emploi", path: "/emploi", icon: Briefcase },
   { label: "Archives", path: "/archives", icon: Archive },
@@ -36,9 +50,13 @@ const navItems: NavItem[] = [
   { label: "Contact", path: "/contact", icon: MapPin },
 ];
 
+
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [mobileEventOpen, setMobileEventOpen] = useState(false);
+  const dropdownRef = useState<HTMLDivElement | null>(null);
   const location = useLocation();
 
   useEffect(() => {
@@ -50,7 +68,10 @@ export default function Header() {
   // Fermer le menu mobile lors du changement de route
   useEffect(() => {
     setMenuOpen(false);
+    setDropdownOpen(false);
+    setMobileEventOpen(false);
   }, [location]);
+
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
@@ -110,7 +131,64 @@ export default function Header() {
 
           {/* Desktop nav - Sans menus déroulants */}
           <nav className="hidden lg:flex items-center gap-1">
-            {navItems.map((item) => (
+            {navItems.map((item) => ( 
+              item.subItems ? (
+                 <div key={item.label} className="relative" ref={(el) => { dropdownRef[0] = el; }}>
+                  <button
+                    onClick={() => setDropdownOpen((v) => !v)}
+                    className={`flex items-center gap-1 px-4 py-2 rounded-lg text-[14px] font-semibold transition-all duration-150 ${
+                      dropdownOpen
+                        ? "bg-[#0C3823] text-white shadow-md shadow-green-900/20"
+                        : "text-neutral-600 hover:text-[#0C3823] hover:bg-[#0C3823]/5"
+                    }`}
+                  >
+                    {item.label}
+                    <ChevronDown
+                      size={14}
+                      strokeWidth={2.5}
+                      className={`transition-transform duration-200 ${dropdownOpen ? "rotate-180" : ""}`}
+                    />
+                  </button>
+ 
+                  {/* Dropdown panel */}
+                  {dropdownOpen && (
+                    <div className="absolute top-full left-0 mt-2 w-44 bg-white border border-neutral-100 rounded-xl shadow-xl shadow-black/8 overflow-hidden z-50">
+                      {/* Lien parent "Tous les événements" */}
+                      <NavLink
+                        to={item.path}
+                        end
+                        className={({ isActive }) =>
+                          `block px-4 py-2.5 text-[13px] font-semibold border-b border-neutral-100 transition-colors ${
+                            isActive
+                              ? "bg-[#0C3823]/8 text-[#0C3823]"
+                              : "text-neutral-500 hover:bg-neutral-50 hover:text-[#0C3823]"
+                          }`
+                        }
+                        onClick={() => setDropdownOpen(false)}
+                      >
+                       
+                      </NavLink>
+ 
+                      {item.subItems.map((sub) => (
+                        <NavLink
+                          key={sub.label}
+                          to={sub.path}
+                          className={({ isActive }) =>
+                            `block px-4 py-2.5 text-[13px] font-semibold transition-colors ${
+                              isActive
+                                ? "bg-[#0C3823] text-white"
+                                : "text-neutral-700 hover:bg-[#0C3823]/5 hover:text-[#0C3823]"
+                            }`
+                          }
+                          onClick={() => setDropdownOpen(false)}
+                        >
+                          {sub.label}
+                        </NavLink>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ):(
               <NavLink
                 key={item.label}
                 to={item.path}
@@ -123,7 +201,7 @@ export default function Header() {
                 }
               >
                 {item.label}
-              </NavLink>
+              </NavLink> )
             ))}
           </nav>
 
@@ -152,6 +230,65 @@ export default function Header() {
             <div className="px-4 py-3 space-y-1">
               {navItems.map((item) => {
                 const Icon = item.icon;
+
+                 if (item.subItems) {
+                  const isParentActive = location.pathname.startsWith(item.path);
+                  return (
+                    <div key={item.label}>
+                      <button
+                        onClick={() => setMobileEventOpen((v) => !v)}
+                        className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-[14px] font-semibold transition-colors ${
+                         isParentActive
+                            ? "bg-[#0C3823] text-white"
+                            : "text-neutral-700 hover:bg-neutral-50"
+                        }`}
+                      >
+                        <div
+                          className={`w-8 h-8 rounded-lg flex items-center justify-center ${
+                             isParentActive ? "bg-white/20" : "bg-[#0C3823]/[0.07]"
+                          }`}
+                        >
+                          <Icon
+                            size={16}
+                            strokeWidth={2}
+                            className={ isParentActive ?"text-white" : "text-[#0C3823]"}
+                          />
+                        </div>
+                        <span className="flex-1 text-left">{item.label}</span>
+                        <ChevronDown
+                          size={16}
+                          strokeWidth={2}
+                          className={`transition-transform duration-200 ${
+                            mobileEventOpen ? "rotate-180" : ""
+                          } ${ isParentActive ? "text-white/70" : "text-neutral-400"}`}
+                        />
+                      </button>
+ 
+                      {mobileEventOpen && (
+                        <div className="ml-11 mt-1 space-y-0.5">
+                          
+                          {item.subItems.map((sub) => (
+                            <NavLink
+                              key={sub.label}
+                              to={sub.path}
+                              className={({ isActive: a }) =>
+                                `block px-4 py-2.5 rounded-xl text-[13px] font-semibold transition-colors ${
+                                  a
+                                    ? "bg-[#0C3823] text-white"
+                                    : "text-neutral-700 hover:bg-neutral-50 hover:text-[#0C3823]"
+                                }`
+                              }
+                              onClick={() => setMenuOpen(false)}
+                            >
+                              {sub.label}
+                            </NavLink>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  );
+                }
+
                 return (
                   <NavLink
                     key={item.label}
