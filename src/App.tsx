@@ -6,9 +6,7 @@ import Header from './Components/Header'
 import Home from './Pages/Home'
 import Ficof from './Pages/Ficof'
 import Evenement from './Pages/Evenement'
-import Formation from './Pages/Formation'
 import Emploi from './Pages/Emploi'
-import Archives from './Pages/Archives'
 import Conferences from './Pages/Conferences'
 import Adhesion from './Pages/Adhesion'
 import Contact from './Pages/Contact'
@@ -24,6 +22,8 @@ import Veille from './Pages/Formations/Veille'
 import Conseils from './Pages/Formations/Conseils'
 import Footer from './Components/Footer'
 import EvenementPage from './Pages/Evenements/EvennementPage'
+import FormationsPage from './Pages/FormationsPage'
+import ArchivesPage from './Pages/ArchivesPage'
 
 function App() {
   return (
@@ -35,9 +35,9 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/ficof" element={<Ficof />} />
           <Route path="/evenements" element={<Evenement />} />
-          <Route path="/formations" element={<Formation />} />
+          <Route path="/formations" element={<FormationsPage />} />
           <Route path="/emploi" element={<Emploi />} />
-          <Route path="/archives" element={<Archives />} />
+          <Route path="/archives" element={<ArchivesPage />} />
           <Route path="/conferences" element={<Conferences />} />
           <Route path="/adhesion" element={<Adhesion />} />
           <Route path="/contact" element={<Contact />} />
