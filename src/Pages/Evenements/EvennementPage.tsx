@@ -6,7 +6,10 @@ import { evenements } from "../../data/EventsData";
 
 export default function EvenementPage() {
   const { slug } = useParams<{ slug: string }>();
-  const ev = slug ? evenements[slug] : undefined;
+
+  // Normalise le slug en minuscules pour matcher les clés de evenements
+  const key = slug?.toLowerCase();
+  const ev = key ? evenements[key] : undefined;
 
   if (!ev) {
     return (

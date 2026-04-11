@@ -23,7 +23,7 @@ const tabs: Tab[] = [
 
 export default function ArchiveTabs({ active, onChange, counts }: Props) {
   return (
-    <div className="border-b border-neutral-200 bg-white sticky top-[105px] z-30">
+    <div className="border-b border-neutral-200 bg-white sticky top-26.25 z-30">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex overflow-x-auto scrollbar-none gap-1">
           {tabs.map(({ id, label, icon: Icon }) => (

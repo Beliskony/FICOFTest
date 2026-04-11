@@ -1,5 +1,4 @@
-import type { Evenement } from "../Interfaces/types"
-
+import type { Evenement } from "../Interfaces/types";
 
 export const evenements: Record<string, Evenement> = {
   afcom: {
@@ -24,8 +23,12 @@ export const evenements: Record<string, Evenement> = {
         annee: 2024,
         theme: "La digitalisation de la comptabilité ivoirienne",
         date: "14 juin 2024",
+        day: "14",
+        month: "Juin",
         lieu: "Hôtel Ivoire, Abidjan",
+        image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80",
         participants: 320,
+        spotsRestants: null,
         rapport: {
           titre: "Rapport AFCOM 2024",
           description:
@@ -52,8 +55,12 @@ export const evenements: Record<string, Evenement> = {
         annee: 2023,
         theme: "Fiscalité et compétitivité des entreprises ivoiriennes",
         date: "10 juin 2023",
+        day: "10",
+        month: "Juin",
         lieu: "Sofitel Abidjan Hôtel Ivoire",
+        image: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&q=80",
         participants: 280,
+        spotsRestants: null,
         rapport: {
           titre: "Rapport AFCOM 2023",
           description:
@@ -73,8 +80,12 @@ export const evenements: Record<string, Evenement> = {
         annee: 2022,
         theme: "Le rôle du comptable dans l'accès au financement des PME",
         date: "18 juin 2022",
+        day: "18",
+        month: "Juin",
         lieu: "Palm Club, Cocody",
+        image: "https://images.unsplash.com/photo-1511578314322-379afb476865?w=800&q=80",
         participants: 210,
+        spotsRestants: null,
         articles: [],
       },
     ],
@@ -102,8 +113,12 @@ export const evenements: Record<string, Evenement> = {
         annee: 2025,
         theme: "Comment négocier son salaire en sortie d'école ?",
         date: "22 mars 2025",
+        day: "22",
+        month: "Mars",
         lieu: "Urban Café, Plateau",
+        image: "https://images.unsplash.com/photo-1556761175-4b46a572b786?w=800&q=80",
         participants: 80,
+        spotsRestants: 12,
         articles: [
           {
             titre: "CJP #13 : les jeunes pros boostent leur culture salariale",
@@ -117,8 +132,12 @@ export const evenements: Record<string, Evenement> = {
         annee: 2024,
         theme: "E-IMPÔTS : prise en main et bonnes pratiques",
         date: "14 novembre 2024",
+        day: "14",
+        month: "Nov",
         lieu: "Le Patio, Marcory",
+        image: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=800&q=80",
         participants: 65,
+        spotsRestants: null,
         articles: [],
       },
     ],
@@ -146,8 +165,12 @@ export const evenements: Record<string, Evenement> = {
         annee: 2024,
         theme: "Parcours d'un DGF ivoirien : de l'école à la direction",
         date: "19 octobre 2024",
+        day: "19",
+        month: "Oct",
         lieu: "FICOF HQ, Plateau",
+        image: "https://images.unsplash.com/photo-1560439514-4e9645039924?w=800&q=80",
         participants: 60,
+        spotsRestants: null,
         rapport: {
           titre: "Synthèse ReM 2024",
           description:
@@ -167,8 +190,12 @@ export const evenements: Record<string, Evenement> = {
         annee: 2023,
         theme: "Être expert-comptable en Afrique de l'Ouest aujourd'hui",
         date: "25 novembre 2023",
+        day: "25",
+        month: "Nov",
         lieu: "FICOF HQ, Plateau",
+        image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=80",
         participants: 50,
+        spotsRestants: null,
         articles: [],
       },
     ],

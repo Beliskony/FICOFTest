@@ -135,7 +135,7 @@ useEffect(() => {
           <div className="flex justify-between items-end">
             
             {/* Indicateurs (dots) à gauche */}
-            <div className="flex gap-3">
+            <div className="gap-3 hidden md:flex">
               {sliderData.map((_, index) => (
                 <button
                   key={index}
